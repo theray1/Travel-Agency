@@ -21,14 +21,14 @@ Pour ce faire, cliquez sur l'icône "Fork" (ou "Créer une divergence" en franç
 
 . Ajoutez tous les autres membres du groupe à votre fork.
 
-. Créez un fichier nommé `CONTRIBUTORS.md` et y ajoutez le prénom, le nom, le numéro d'étudiant et l'addresse email de tous les participants.
+. Créez un fichier nommé `CONTRIBUTORS.md` et ajoutez-y le prénom, le nom, le numéro d'étudiant et l'adresse email de tous les participants.
 
 . Créez des étiquettes pour organiser les tickets du projet: _bug_, _improvement_, _smell_, _performance_, etc.
 
 . Chaque membre du groupe doit cloner *votre fork du projet* (et non pas celui d'origine).
 Toutes vos modifications devront être poussées sur votre _fork_ et toutes les issues (ou "tickets" en français) ouvertes le seront sur votre version du projet.
 
-. *Il ne doit y avoir qu'un seul "fork" par groupe d'étudiants.* Il sera utilisé comme espace de rendu des fichiers lié au projet.
+. *Il ne doit y avoir qu'un seul "fork" par groupe d'étudiants.* Il sera utilisé comme espace de rendu des fichiers liés au projet.
 
 == Diagramme de classes (niveau conception)
 
@@ -81,7 +81,7 @@ Pour le nommage de vos tests, vous pouvez vous référer à la ressource suivant
 
 . Implémenter le code qui résout le ticket. Les tests écrits précédemment devront valider votre implémentation. _Faites attention à la régression!_: toute modification ne doit pas "casser" du code qui marchait auparavant (les autres tests unitaires doivent passer).
 
-. Si jamais vous devez changer d'approche au niveau des tests, de l'implémentation, etc, *ajouter un commentaire sur le ticket Gitlab* pour documenter tout changement. *N'éditez pas le texte du ticket original*, afin de garder un historique de votre travail.
+. Si jamais vous devez changer d'approche au niveau des tests, de l'implémentation, etc, *ajoutez un commentaire sur le ticket Gitlab* pour documenter tout changement. *N'éditez pas le texte du ticket original*, afin de garder un historique de votre travail.
 
 . Effectuer un (ou plusieurs) commit(s) pour pousser vos modifications sur le dépôt, en référençant le numéro du ticket et en indiquant votre progression dans sa résolution. Nous vous invitons à lire le billet suivant à ce sujet: https://chris.beams.io/posts/git-commit/.
 
@@ -92,7 +92,7 @@ Le code du projet est là pour vous fournir une base de code. Vous êtes libre d
 
 == Evaluation
 
-* Le travail à rendre se composera de votre *fork en ligne Gitalb*, sur lequel vous aurez poussé toutes vos modifications. Cela inclut également tous les messages de commits et tickets ouverts.
+* Le travail à rendre se composera de votre *fork en ligne Gitlab*, sur lequel vous aurez poussé toutes vos modifications. Cela inclut également tous les messages de commits et tickets ouverts.
 
 * Si vous le souhaitez, vous pouvez ajouter un fichier "`RENDU.md`" à la racine du projet, afin de décrire les spécificités de votre projet (choix techniques, parties non traitées, extensions non demandées, etc.).
 
@@ -118,7 +118,7 @@ Nous vous recommandons de l'installer et de l'utiliser dans le cadre de ce proje
 Pour l'installer, vous avez deux options:
 
 . Aller dans le menu "Préférences" de IntelliJ -&gt; Section "Plugins", chercher "Sonarlint" puis cliquer sur "Installer".
-. Installer le manuellement : https://plugins.jetbrains.com/plugin/7973-sonarlint
+. L'installer manuellement : https://plugins.jetbrains.com/plugin/7973-sonarlint
 
 == Dépendances Maven
 
@@ -128,6 +128,6 @@ Le projet de démarrage est configuré comme un projet Maven standard. Vous ête
 
 * https://github.com/atlanmod/Commons[Atlanmod Commons] qui fournit une extension de la librairie Java standard.
 
-* https://joel-costigliola.github.io/assertj/[AssertJ], qui permet l'écriture assertions "fluides" en Java.
+* https://joel-costigliola.github.io/assertj/[AssertJ], qui permet l'écriture d'assertions "fluides" en Java.
 
 * https://spotbugs.github.io[SpotBugs], qui fournit quelques annotations et permet l'analyse statique de code
