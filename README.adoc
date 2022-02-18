@@ -5,7 +5,7 @@ Dans le cadre de ce projet, vous allez contribuer au développement de ce logici
 
 == Préambule
 
-Si vous utilisez les machines des salles de TPs dans le cadre de ce projet, vous devez utiliser le Java JDK *java-8-oracle*.
+Si vous utilisez les machines des salles de TPs dans le cadre de ce projet, vous devez utiliser le Java JDK 11.
 Vous pouvez changez le JDK utilisé dans un projet dans le menu "Project structure" &gt; "Project" &gt; "Project SDK".
 
 == Organisation
