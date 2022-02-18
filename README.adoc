@@ -16,10 +16,12 @@ Pour rappel:
 
 Commencez par préparer l'environnement de votre projet:
 
-. Avant toutes choses, un membre du groupe doit créer un *"Fork"* du projet sur le serveur.
+. Avant toute chose, un membre du groupe doit créer un *"Fork"* du projet sur le serveur.
 Pour ce faire, cliquez sur l'icône "Fork" (ou "Créer une divergence" en français) de la page du projet pour accéder au lien suivant: https://gitlab.univ-nantes.fr/naomod/software-construction-course/travel-agency/forks/new
 
-. Ajouter tous les autres membres du groupe à votre fork.
+. Ajoutez tous les autres membres du groupe à votre fork.
+
+. Créez un fichier nommé `CONTRIBUTORS.md` et y ajoutez le prénom, le nom, le numéro d'étudiant et l'addresse email de tous les participants.
 
 . Créez des étiquettes pour organiser les tickets du projet: _bug_, _improvement_, _smell_, _performance_, etc.
 
@@ -28,15 +30,45 @@ Toutes vos modifications devront être poussées sur votre _fork_ et toutes les 
 
 . *Il ne doit y avoir qu'un seul "fork" par groupe d'étudiants.* Il sera utilisé comme espace de rendu des fichiers lié au projet.
 
-== UML du logiciel
+== Diagramme de classes (niveau conception)
 
-image:uml.png[Travel-agency UML]
+[plantuml]
+....
+class City {
+    name : String
+    country : String
+}
+class Correspondance {
+    startTime : DateTime
+    arrivalTime : DateTime
+}
+class Travel {
+    getFirstStep() : Correspondance
+    getLastStep() : Correspondance
+}
+class Calendar {
+}
+class Person {
+    name : String
+    role : String
+    ====
+    addTravelTo(travel : Travel, agent : Person)
+}
+City "[1] origin"<-- Correspondance
+City "[1] destination"<-- Correspondance
+Correspondance "[1.10] steps"- "[1] travel" Travel : \t\t\t\t\t
+Travel "[0..10] travels"-- "[1] parent" Calendar
+Person "[1] calendar" - "[1] owner" Calendar: \t\t\t\t
+
+....
+
 
 == Travail à réaliser
 
-Le travail à réaliser est réparti en différentes "issues" (ou tickets), répertoriées dans le fichier https://gitlab.univ-nantes.fr/naomod/software-construction-course/travel-agency/blob/master/ISSUES.md[`ISSUES.md`]. *Le but du projet est de résoudre tous ces tickets.* Pour ce faire, *vous devrez suivre le protocole de travail suivant*, suivant la méthodologie Test-Driven Development (TDD).
+Le travail à réaliser est réparti en différentes "issues" (ou tickets), répertoriées dans le fichier link:./ISSUES.adoc[`ISSUES.adoc`].
+*Le but du projet est de résoudre tous ces tickets.* Pour ce faire, *vous devrez suivre le protocole de travail suivant*, suivant la méthodologie Test-Driven Development (TDD).
 
-Pour chaque ticket du fichier https://gitlab.univ-nantes.fr/naomod/software-construction-course/travel-agency/blob/master/ISSUES.md[`ISSUES.md`]:
+Pour chaque ticket du fichier link:./ISSUES.adoc[`ISSUES.adoc`]:
 
 . Ouvrez un ticket dans votre projet Gitlab (sur l'interface en ligne de Gitlab, section _Tickets_). Vous y détaillerez les points suivants:
 * Un bref résumé du problème lié au ticket.
@@ -92,6 +124,10 @@ Pour l'installer, vous avez deux options:
 
 Le projet de démarrage est configuré comme un projet Maven standard. Vous êtes libres d'ajouter de nouvelles extensions lors du développement du projet. Par défaut, les dépendances suivantes sont configurées:
 
-* JUnit (https://junit.org/junit5/) pour gérer les tests.
+* https://junit.org[JUnit Jupiter] pour exécuter les tests unitaires.
 
-* Apache Commons Lang (https://commons.apache.org/proper/commons-lang/) qui fournit une extension de la librairie Java standard.
+* https://github.com/atlanmod/Commons[Atlanmod Commons] qui fournit une extension de la librairie Java standard.
+
+* https://joel-costigliola.github.io/assertj/[AssertJ], qui permet l'écriture assertions "fluides" en Java.
+
+* https://spotbugs.github.io[SpotBugs], qui fournit quelques annotations et permet l'analyse statique de code
