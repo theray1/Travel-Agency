@@ -21,6 +21,9 @@ Pour ce faire, cliquez sur l'icône "Fork" (ou "Créer une divergence" en franç
 
 . Ajoutez tous les autres membres du groupe à votre fork.
 
+. Ajoutez également comme nouveau membre l’utilisateur virtuel appelé *Naobot*, avec le statut "Reporter".
+Cet utilisateur virtuel que nous contrôlons nous donne le droit d’accéder à votre travail et nous permettra de récupérer vos projets.
+
 . Créez un fichier nommé `CONTRIBUTORS.md` et ajoutez-y le prénom, le nom, le numéro d'étudiant et l'adresse email de tous les participants.
 
 . Créez des étiquettes pour organiser les tickets du projet: _bug_, _improvement_, _smell_, _performance_, etc.
