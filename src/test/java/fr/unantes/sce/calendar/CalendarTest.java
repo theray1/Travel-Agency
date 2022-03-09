@@ -14,7 +14,7 @@ public class CalendarTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        Person p1 = new Person("TestName", "TestRole");
+        Person p1 = new Person("TestName", "agent");
         c = new Calendar(p1);
 
     }
@@ -26,7 +26,7 @@ public class CalendarTest {
     @Test
     void SetOwner_HasNoOwner_HasOwner2() throws InvalidClassException {
         c.setOwner(null);
-        Person p2 = new Person("TestName2", "TestRole2");
+        Person p2 = new Person("TestName2", "agent");
         c.setOwner(p2);
         assert c.getOwner().equals(p2);
     }
