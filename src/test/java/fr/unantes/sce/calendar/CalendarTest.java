@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.InvalidClassException;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalendarTest {
 
@@ -14,7 +15,7 @@ public class CalendarTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        Person p1 = new Person("TestName", "TestRole");
+        Person p1 = new Person("TestName", "agent");
         c = new Calendar(p1);
 
     }
@@ -26,17 +27,17 @@ public class CalendarTest {
     @Test
     void SetOwner_HasNoOwner_HasOwner2() throws InvalidClassException {
         c.setOwner(null);
-        Person p2 = new Person("TestName2", "TestRole2");
+        Person p2 = new Person("TestName2", "agent");
         c.setOwner(p2);
         assert c.getOwner().equals(p2);
     }
 
     @Test
     void addTravel_HandShake() {
-        Travel t = new Travel(c);
+        Travel t = new Travel(null);
         c.addTravel(t);
 
-        assert t.getParent().equals(c);
+        assert t.getParent() != null;
         assert c.travels().contains(t);
     }
 
