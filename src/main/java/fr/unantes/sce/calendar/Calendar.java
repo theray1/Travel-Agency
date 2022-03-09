@@ -31,4 +31,8 @@ public class Calendar {
     public boolean removeTravel(Travel travel) {
         return travels.remove(travel);
     }
+
+    public ArrayList<Travel> travels(){
+        return this.travels;
+    }
 }
