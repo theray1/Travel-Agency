@@ -54,4 +54,13 @@ class TravelTest {
         });
 
     }
+
+    @Test
+    void setParent_Handshake(){
+        travel.setParent(parent);
+
+        assert parent.travels().contains(travel);
+        assert travel.getParent().equals(parent);
+    }
+
 }

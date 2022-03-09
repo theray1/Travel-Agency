@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.InvalidClassException;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalendarTest {
 
@@ -33,10 +34,10 @@ public class CalendarTest {
 
     @Test
     void addTravel_HandShake() {
-        Travel t = new Travel(c);
+        Travel t = new Travel(null);
         c.addTravel(t);
 
-        assert t.getParent().equals(c);
+        assert t.getParent() != null;
         assert c.travels().contains(t);
     }
 
