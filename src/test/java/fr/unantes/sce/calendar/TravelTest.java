@@ -4,6 +4,10 @@ import fr.unantes.sce.people.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
+import java.util.Iterator;
+import java.util.TreeSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TravelTest {
@@ -61,6 +65,32 @@ class TravelTest {
 
         assert parent.travels().contains(travel);
         assert travel.getParent().equals(parent);
+    }
+
+    @Test
+    void stepsConsistencyBasicTest(){
+        City city1 = new City("France","Paris");
+        City city2 = new City("Belgique","Bruxelles");
+        City city3 = new City("Irlande","Dublin");
+        City city4 = new City("Espagne","Madrid");
+        Correspondence corresp1 = new Correspondence(travel, city1, city2, LocalTime.of(8,50), LocalTime.of(12,25));
+        Correspondence corresp2 = new Correspondence(travel, city2, city3, LocalTime.of(15,50), LocalTime.of(19,35));
+        Correspondence corresp3 = new Correspondence(travel, city3, city4, LocalTime.of(23,0), LocalTime.of(1,40));
+        travel.addCorrespondence(corresp2);
+        travel.addCorrespondence(corresp3);
+        travel.addCorrespondence(corresp1);
+
+        TreeSet<Correspondence> steps = travel.getSteps();
+        for(Correspondence each : steps){
+            assertNotEquals(null, each.getDestinationCity());
+        }
+        // city of arrival of a correspondence must be equal to the city of departure of the next
+        Iterator<Correspondence> iterator = steps.iterator();
+        Correspondence cinit = iterator.next();
+        for(int i=0 ; i<steps.size()-1 ; i++){
+            //(cinit = iterator.next()) affecte iterator.next() a cinit avant de faire le getStartCity()
+            assertEquals(cinit.getDestinationCity(), ((cinit = iterator.next()).getStartCity()));
+        }
     }
 
 }

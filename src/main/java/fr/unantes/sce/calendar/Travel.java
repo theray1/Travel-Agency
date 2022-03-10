@@ -1,18 +1,23 @@
 package fr.unantes.sce.calendar;
 
-import java.nio.charset.CoderResult;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 /**
  * A Travel goes from one place to another, with a departure date and an arrival date
  */
 public class Travel {
-    private ArrayList<Correspondence> steps;
+    private TreeSet<Correspondence> steps;
     private Calendar parent;
 
     public Travel(Calendar parent) {
         this.parent = parent;
-        steps = new ArrayList<>();
+        steps = new TreeSet<>(Comparator.comparing(Correspondence::getStartTime));
+    }
+
+    public TreeSet<Correspondence> getSteps() {
+        return steps;
     }
 
     public Calendar getParent() {
@@ -24,11 +29,16 @@ public class Travel {
     }
 
     public Correspondence getFirstStep() {
-        return (Correspondence) steps.get(0);
+        return steps.iterator().next();
     }
 
     public Correspondence getLastStep() {
-        return (Correspondence) steps.get(steps.size() - 1);
+        Iterator<Correspondence> iterator = steps.iterator();
+        Correspondence c = null;
+        while(iterator.hasNext()){
+            c=iterator.next();
+        }
+        return c;
     }
 
     public boolean addCorrespondence(Correspondence step) {

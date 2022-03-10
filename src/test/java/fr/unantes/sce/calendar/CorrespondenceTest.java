@@ -48,6 +48,7 @@ class CorrespondenceTest {
         assert(corresp1.getStartCity().equals(city1));
         corresp1.setDestinationCity(city1);
         assert(corresp1.getDestinationCity().equals(city2));
+        //TODO add test of contructor with same cities
     }
 
     @AfterEach

@@ -7,6 +7,7 @@ public class Correspondence {
     private Travel travel;
     private City startCity;
     private City destinationCity;
+    //TODO : voir pour avoir les jour mois année en plus de l'heure et les minutes
     private LocalTime startTime;
     private LocalTime arrivalTime;
 
