@@ -12,13 +12,12 @@ public class Correspondence {
 
 
     public Correspondence(Travel travel, City startCity, City destinationCity, int startTime, int arrivalTime) {
-        this.travel = travel;
-        this.startCity = startCity;
-        this.destinationCity = destinationCity;
-        this.startTime = LocalTime.of(startTime/60,startTime%60);
-        this.arrivalTime = LocalTime.of(arrivalTime/60,arrivalTime%60);
+        this(travel, startCity, destinationCity, LocalTime.of(startTime/60,startTime%60), LocalTime.of(arrivalTime/60,arrivalTime%60));
     }
     public Correspondence(Travel travel, City startCity, City destinationCity, LocalTime startTime, LocalTime arrivalTime) {
+        if(startCity!=null && startCity.equals(destinationCity)){
+            throw new RuntimeException("startCity and destinationCity must be different");
+        }
         this.travel = travel;
         this.startCity = startCity;
         this.destinationCity = destinationCity;
@@ -39,7 +38,9 @@ public class Correspondence {
     }
 
     public void setStartCity(City startCity) {
-        this.startCity = startCity;
+        if(startCity!=null && !startCity.equals(destinationCity)){
+            this.startCity = startCity;
+        }
     }
 
     public City getDestinationCity() {
@@ -47,7 +48,9 @@ public class Correspondence {
     }
 
     public void setDestinationCity(City destinationCity) {
-        this.destinationCity = destinationCity;
+        if(destinationCity!=null && !destinationCity.equals(startCity)) {
+            this.destinationCity = destinationCity;
+        }
     }
 
     public LocalTime getStartTime() {
