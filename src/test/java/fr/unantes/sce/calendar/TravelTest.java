@@ -63,8 +63,8 @@ class TravelTest {
     void setParent_Handshake(){
         travel.setParent(parent);
 
-        assert parent.travels().contains(travel);
-        assert travel.getParent().equals(parent);
+        assertTrue(parent.travels().contains(travel));
+        assertEquals(travel.getParent(), parent);
     }
 
     @Test

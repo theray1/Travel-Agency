@@ -29,7 +29,7 @@ public class CalendarTest {
         c.setOwner(null);
         Person p2 = new Person("TestName2", "agent");
         c.setOwner(p2);
-        assert c.getOwner().equals(p2);
+        assertEquals(c.getOwner(), p2);
     }
 
     @Test
@@ -37,8 +37,8 @@ public class CalendarTest {
         Travel t = new Travel(null);
         c.addTravel(t);
 
-        assert t.getParent() != null;
-        assert c.travels().contains(t);
+        assertNotNull(t.getParent());
+        assertTrue(c.travels().contains(t));
     }
 
     @Test
@@ -48,9 +48,10 @@ public class CalendarTest {
         }
 
         Travel t = new Travel(c);
-        c.addTravel(t);
 
-        assert !c.travels().contains(t);
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            c.addTravel(t);
+        });
     }
 
     @Test
@@ -60,6 +61,6 @@ public class CalendarTest {
         c.addTravel(t);
 
         c.removeTravel(t);
-        assert !c.travels().contains(t);
+        assertFalse(c.travels().contains(t));
     }
 }
