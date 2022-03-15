@@ -1,21 +1,18 @@
 package fr.unantes.sce.calendar;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.time.LocalTime;
 
 public class Correspondence {
     private Travel travel;
     private City startCity;
     private City destinationCity;
-    //TODO : voir pour avoir les jour mois année en plus de l'heure et les minutes
-    private LocalTime startTime;
-    private LocalTime arrivalTime;
+
+    private LocalDateTime startTime;
+    private LocalDateTime arrivalTime;
 
 
-    public Correspondence(Travel travel, City startCity, City destinationCity, int startTime, int arrivalTime) {
-        this(travel, startCity, destinationCity, LocalTime.of(startTime/60,startTime%60), LocalTime.of(arrivalTime/60,arrivalTime%60));
-    }
-    public Correspondence(Travel travel, City startCity, City destinationCity, LocalTime startTime, LocalTime arrivalTime) {
+    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime) {
         if(startCity!=null && startCity.equals(destinationCity)){
             throw new RuntimeException("startCity and destinationCity must be different");
         }
@@ -42,6 +39,9 @@ public class Correspondence {
         if(startCity!=null && !startCity.equals(destinationCity)){
             this.startCity = startCity;
         }
+        else{
+            throw new RuntimeException("startCity and destinationCity must be different");
+        }
     }
 
     public City getDestinationCity() {
@@ -52,22 +52,39 @@ public class Correspondence {
         if(destinationCity!=null && !destinationCity.equals(startCity)) {
             this.destinationCity = destinationCity;
         }
+        else{
+            throw new RuntimeException("startCity and destinationCity must be different");
+        }
     }
 
-    public LocalTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setStartTime(LocalDateTime startTime) {
+        if(startTime!=null){
+            if(this.arrivalTime==null || startTime.compareTo(this.arrivalTime)<0){
+                this.startTime = startTime;
+            }
+            else{
+                throw new RuntimeException("start time must be before arrival time");
+            }
+        }
     }
 
-    public LocalTime getArrivalTime() {
+    public LocalDateTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        if(arrivalTime!=null){
+            if(this.startTime==null || this.startTime.compareTo(arrivalTime)<0){
+                this.arrivalTime = arrivalTime;
+            }
+            else{
+                throw new RuntimeException("start time must be before arrival time");
+            }
+        }
     }
 
     @Override
