@@ -12,7 +12,7 @@ public class Travel {
     private Calendar parent;
 
     public Travel(Calendar parent) {
-        this.parent = parent;
+        this.setParent(parent);
         steps = new TreeSet<>(Comparator.comparing(Correspondence::getStartTime));
     }
 
@@ -26,26 +26,29 @@ public class Travel {
 
     public void setParent(Calendar parent) {
         this.parent = parent;
+        parent.addTravel(this);
     }
 
     public Correspondence getFirstStep() {
-        return steps.iterator().next();
+        return steps.first();
     }
 
     public Correspondence getLastStep() {
-        Iterator<Correspondence> iterator = steps.iterator();
-        Correspondence c = null;
-        while(iterator.hasNext()){
-            c=iterator.next();
-        }
-        return c;
+        return steps.last();
     }
 
-    public boolean addCorrespondence(Correspondence step) {
-        return steps.add(step);
+    public boolean addCorrespondence(Correspondence correspondence) {
+        correspondence.basicSetTravel(this);
+        return steps.add(correspondence);
+    }
+
+    protected boolean basicAddCorrespondance(Correspondence correspondence) {
+        return steps.add(correspondence);
     }
 
     public boolean removeCorrespondence(Correspondence step) {
+        //TODO : créer une instance null d'un trajet
+        step.basicSetTravel(null);
         return steps.remove(step);
     }
 }

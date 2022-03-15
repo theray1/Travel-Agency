@@ -12,15 +12,17 @@ public class Correspondence {
     private LocalDateTime arrivalTime;
 
 
-    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime) {
-        if(startCity!=null && startCity.equals(destinationCity)){
+    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime) throws RuntimeException{
+        if (startCity != null && startCity.equals(destinationCity))
             throw new RuntimeException("startCity and destinationCity must be different");
-        }
+        if (arrivalTime.isBefore(arrivalTime))
+            throw new RuntimeException("ArrivalTime must be after StartTime");
         this.travel = travel;
         this.startCity = startCity;
         this.destinationCity = destinationCity;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
+        this.travel.addCorrespondence(this);
     }
 
     public Travel getTravel() {
@@ -28,6 +30,11 @@ public class Correspondence {
     }
 
     public void setTravel(Travel travel) {
+        this.travel = travel;
+        this.travel.basicAddCorrespondance(this);
+    }
+
+    public void basicSetTravel(Travel travel) {
         this.travel = travel;
     }
 
