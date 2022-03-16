@@ -24,6 +24,7 @@ class TravelTest {
     private LocalDateTime date3;
     private LocalDateTime date4;
     private LocalDateTime date5;
+    private LocalDateTime date6;
     private Correspondence corresp1;
     private Correspondence corresp2;
     private Correspondence corresp3;
@@ -43,10 +44,11 @@ class TravelTest {
         date3 = LocalDateTime.of(2018, 4, 20, 9, 35);
         date4 = LocalDateTime.of(2018, 5, 1, 12, 12);
         date5 = LocalDateTime.of(2018, 6, 3, 3, 45);
+        date6 = LocalDateTime.of(2018, 6, 5, 4, 5);
 
         corresp1 = new Correspondence(travel, city1, city2, date1, date2);
         corresp2 = new Correspondence(travel, city2, city3, date3, date4);
-        corresp3 = new Correspondence(travel, city3, city4, date4, date5);
+        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
     }
 
     @Test
@@ -70,19 +72,46 @@ class TravelTest {
     }
 
     @Test
-    void the_end_cities_of_the_steps_must_be_the_beginning_of_the_next() {
-
+    void getFirst_and_getLast_step_test() {
         travel.addCorrespondence(this.corresp2);
         travel.addCorrespondence(this.corresp3);
         travel.addCorrespondence(this.corresp1);
+
+        assertEquals(this.corresp1,travel.getFirstStep());
+        assertEquals(this.corresp3,travel.getLastStep());
+    }
+
+    @Test
+    void the_end_cities_of_the_steps_must_be_the_beginning_of_the_next() {
+        travel.addCorrespondence(this.corresp2);
+        travel.addCorrespondence(this.corresp3);
+        travel.addCorrespondence(this.corresp1);
+
         TreeSet<Correspondence> actualSteps = travel.getSteps();
 
         // city of arrival of a correspondence must be equal to the city of departure of the next
         Iterator<Correspondence> iterator = actualSteps.iterator();
-        Correspondence cinit = iterator.next();
+        Correspondence cnext = iterator.next();
         for (int i = 0; i < actualSteps.size() - 1; i++) {
-            //(cinit = iterator.next()) affecte iterator.next() a cinit avant de faire le getStartCity()
-            assertEquals(cinit.getDestinationCity(), ((cinit = iterator.next()).getStartCity()));
+            //(cnext = iterator.next()) affecte iterator.next() a cnext avant de faire le getStartCity()
+            assertEquals(cnext.getDestinationCity(), ((cnext = iterator.next()).getStartCity()));
+        }
+    }
+
+    @Test
+    void the_arrival_time_of_the_steps_must_be_before_the_start_time_of_the_next() {
+        travel.addCorrespondence(this.corresp2);
+        travel.addCorrespondence(this.corresp3);
+        travel.addCorrespondence(this.corresp1);
+
+        TreeSet<Correspondence> actualSteps = travel.getSteps();
+
+        // city of arrival of a correspondence must be equal to the city of departure of the next
+        Iterator<Correspondence> iterator = actualSteps.iterator();
+        Correspondence cnext = iterator.next();
+        for (int i = 0; i < actualSteps.size() - 1; i++) {
+            //(cnext = iterator.next()) affecte iterator.next() a cnext avant de faire le getStartTime()
+            assertTrue(cnext.getArrivalTime().isBefore((cnext = iterator.next()).getStartTime()));
         }
     }
 
