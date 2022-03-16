@@ -4,7 +4,6 @@ import fr.unantes.sce.people.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.InvalidClassException;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -33,7 +32,6 @@ class TravelTest {
     public void setUp() throws Exception {
         this.owner = new Person("Test", "admin");
         this.parent = new Calendar(this.owner);
-        this.travel = new Travel(this.parent);
 
         city1 = new City("France", "Paris");
         city2 = new City("Belgique", "Bruxelles");
@@ -45,25 +43,29 @@ class TravelTest {
         date4 = LocalDateTime.of(2018, 5, 1, 12, 12);
         date5 = LocalDateTime.of(2018, 6, 3, 3, 45);
         date6 = LocalDateTime.of(2018, 6, 5, 4, 5);
-
-        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
-        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
-        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
     }
 
     @Test
     void addCorrespondance_Handshake() {
+        this.travel = new Travel(this.parent);
+
+        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
+        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
+        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
 
         assertEquals(this.travel, corresp1.getTravel());
 
         assertTrue(this.travel.removeCorrespondence(corresp3));
         assertFalse(this.travel.removeCorrespondence(corresp3));
 
+        travel.removeCorrespondence(corresp3);
         assertNull(corresp3.getTravel());
     }
 
     @Test
     void setParent_Handshake() {
+        this.travel = new Travel(this.parent);
+
         assertTrue(parent.travels().contains(travel));
         travel.setParent(parent);
         assertTrue(parent.travels().contains(travel));
@@ -73,16 +75,28 @@ class TravelTest {
 
     @Test
     void getFirst_and_getLast_step_test() {
+        this.travel = new Travel(this.parent);
+
+        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
+        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
+        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
+
         travel.addCorrespondence(this.corresp2);
         travel.addCorrespondence(this.corresp3);
         travel.addCorrespondence(this.corresp1);
 
-        assertEquals(this.corresp1,travel.getFirstStep());
-        assertEquals(this.corresp3,travel.getLastStep());
+        assertEquals(this.corresp1, travel.getFirstStep());
+        assertEquals(this.corresp3, travel.getLastStep());
     }
 
     @Test
     void the_end_cities_of_the_steps_must_be_the_beginning_of_the_next() {
+        this.travel = new Travel(this.parent);
+
+        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
+        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
+        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
+
         travel.addCorrespondence(this.corresp2);
         travel.addCorrespondence(this.corresp3);
         travel.addCorrespondence(this.corresp1);
@@ -100,6 +114,12 @@ class TravelTest {
 
     @Test
     void the_arrival_time_of_the_steps_must_be_before_the_start_time_of_the_next() {
+        this.travel = new Travel(this.parent);
+
+        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
+        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
+        corresp3 = new Correspondence(travel, city3, city4, date5, date6);
+
         travel.addCorrespondence(this.corresp2);
         travel.addCorrespondence(this.corresp3);
         travel.addCorrespondence(this.corresp1);

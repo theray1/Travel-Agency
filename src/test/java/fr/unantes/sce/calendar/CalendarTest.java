@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.io.InvalidClassException;
 import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class CalendarTest {
 
     Calendar c;

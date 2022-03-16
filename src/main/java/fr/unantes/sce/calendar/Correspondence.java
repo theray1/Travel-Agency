@@ -12,7 +12,7 @@ public class Correspondence {
     private LocalDateTime arrivalTime;
 
 
-    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime){
+    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime) {
         if (startCity != null && startCity.equals(destinationCity))
             throw new RuntimeException("startCity and destinationCity must be different");
         if (startTime != null && !startTime.isBefore(arrivalTime)) {
@@ -23,7 +23,8 @@ public class Correspondence {
         this.destinationCity = destinationCity;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
-        //this.travel.addCorrespondence(this);
+        if (travel != null)
+            this.travel.addCorrespondence(this);
     }
 
     public Travel getTravel() {
@@ -44,10 +45,9 @@ public class Correspondence {
     }
 
     public void setStartCity(City startCity) {
-        if(startCity!=null && !startCity.equals(destinationCity)){
+        if (startCity != null && !startCity.equals(destinationCity)) {
             this.startCity = startCity;
-        }
-        else{
+        } else {
             throw new RuntimeException("startCity and destinationCity must be different");
         }
     }
@@ -57,10 +57,9 @@ public class Correspondence {
     }
 
     public void setDestinationCity(City destinationCity) {
-        if(destinationCity!=null && !destinationCity.equals(startCity)) {
+        if (destinationCity != null && !destinationCity.equals(startCity)) {
             this.destinationCity = destinationCity;
-        }
-        else{
+        } else {
             throw new RuntimeException("startCity and destinationCity must be different");
         }
     }
@@ -70,11 +69,10 @@ public class Correspondence {
     }
 
     public void setStartTime(LocalDateTime startTime) {
-        if(startTime!=null){
-            if(this.arrivalTime==null || startTime.isBefore(this.arrivalTime)){
+        if (startTime != null) {
+            if (this.arrivalTime == null || startTime.isBefore(this.arrivalTime)) {
                 this.startTime = startTime;
-            }
-            else{
+            } else {
                 throw new RuntimeException("start time must be before arrival time");
             }
         }
@@ -85,11 +83,10 @@ public class Correspondence {
     }
 
     public void setArrivalTime(LocalDateTime arrivalTime) {
-        if(arrivalTime!=null){
-            if(this.startTime==null || this.startTime.isBefore(arrivalTime)){
+        if (arrivalTime != null) {
+            if (this.startTime == null || this.startTime.isBefore(arrivalTime)) {
                 this.arrivalTime = arrivalTime;
-            }
-            else{
+            } else {
                 throw new RuntimeException("start time must be before arrival time");
             }
         }
