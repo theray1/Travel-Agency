@@ -12,17 +12,18 @@ public class Correspondence {
     private LocalDateTime arrivalTime;
 
 
-    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime) throws RuntimeException{
+    public Correspondence(Travel travel, City startCity, City destinationCity, LocalDateTime startTime, LocalDateTime arrivalTime){
         if (startCity != null && startCity.equals(destinationCity))
             throw new RuntimeException("startCity and destinationCity must be different");
-        if (arrivalTime.isBefore(arrivalTime))
+        if (startTime != null && !startTime.isBefore(arrivalTime)) {
             throw new RuntimeException("ArrivalTime must be after StartTime");
+        }
         this.travel = travel;
         this.startCity = startCity;
         this.destinationCity = destinationCity;
         this.startTime = startTime;
         this.arrivalTime = arrivalTime;
-        this.travel.addCorrespondence(this);
+        //this.travel.addCorrespondence(this);
     }
 
     public Travel getTravel() {
@@ -70,7 +71,7 @@ public class Correspondence {
 
     public void setStartTime(LocalDateTime startTime) {
         if(startTime!=null){
-            if(this.arrivalTime==null || startTime.compareTo(this.arrivalTime)<0){
+            if(this.arrivalTime==null || startTime.isBefore(this.arrivalTime)){
                 this.startTime = startTime;
             }
             else{
@@ -85,7 +86,7 @@ public class Correspondence {
 
     public void setArrivalTime(LocalDateTime arrivalTime) {
         if(arrivalTime!=null){
-            if(this.startTime==null || this.startTime.compareTo(arrivalTime)<0){
+            if(this.startTime==null || this.startTime.isBefore(arrivalTime)){
                 this.arrivalTime = arrivalTime;
             }
             else{

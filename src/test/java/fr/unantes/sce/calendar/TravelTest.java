@@ -38,19 +38,19 @@ class TravelTest {
         city2 = new City("Belgique", "Bruxelles");
         city3 = new City("Irlande", "Dublin");
         city4 = new City("Espagne", "Madrid");
-        date1 = LocalDateTime.of(2018, 10, 19, 8, 55);
-        date2 = LocalDateTime.of(2018, 10, 20, 18, 50);
-        date3 = LocalDateTime.of(2018, 10, 20, 9, 35);
-        date4 = LocalDateTime.of(2018, 11, 1, 12, 12);
-        date5 = LocalDateTime.of(2018, 11, 3, 3, 45);
+        date1 = LocalDateTime.of(2018, 2, 19, 8, 55);
+        date2 = LocalDateTime.of(2018, 3, 20, 18, 50);
+        date3 = LocalDateTime.of(2018, 4, 20, 9, 35);
+        date4 = LocalDateTime.of(2018, 5, 1, 12, 12);
+        date5 = LocalDateTime.of(2018, 6, 3, 3, 45);
 
+        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
+        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
+        corresp3 = new Correspondence(travel, city3, city4, date4, date5);
     }
 
     @Test
     void addCorrespondance_Handshake() {
-        corresp1 = new Correspondence(travel, city1, city2, date1, date2);
-        corresp2 = new Correspondence(travel, city2, city3, date3, date4);
-        corresp3 = new Correspondence(travel, city3, city4, date4, date5);
 
         assertEquals(this.travel, corresp1.getTravel());
 
