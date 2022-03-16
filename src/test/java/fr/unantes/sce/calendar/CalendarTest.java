@@ -25,7 +25,7 @@ public class CalendarTest {
     }
 
     @Test
-    void SetOwner_HasNoOwner_HasOwner2() throws InvalidClassException {
+    void SetOwner_sets_owner_properly() throws InvalidClassException {
         c.setOwner(null);
         Person p2 = new Person("TestName2", "agent");
         c.setOwner(p2);
@@ -33,8 +33,9 @@ public class CalendarTest {
     }
 
     @Test
-    void addTravel_HandShake() {
-        Travel t = new Travel(null);
+    void addTravel_HandShake() throws InvalidClassException {
+        Person p = new Person("TestName2", "agent");
+        Travel t = new Travel(new Calendar(p));
         c.addTravel(t);
 
         assertNotNull(t.getParent());
@@ -49,9 +50,7 @@ public class CalendarTest {
 
         Travel t = new Travel(c);
 
-        assertThrows(IndexOutOfBoundsException.class, () -> {
-            c.addTravel(t);
-        });
+        assertThrows(IndexOutOfBoundsException.class, () -> c.addTravel(t));
     }
 
     @Test
