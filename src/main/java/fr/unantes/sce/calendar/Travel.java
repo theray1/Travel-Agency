@@ -1,14 +1,13 @@
 package fr.unantes.sce.calendar;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
  * A Travel goes from one place to another, with a departure date and an arrival date
  */
 public class Travel {
-    private TreeSet<Correspondence> steps;
+    private final TreeSet<Correspondence> steps;
     private Calendar parent;
 
     public Travel(Calendar parent) {

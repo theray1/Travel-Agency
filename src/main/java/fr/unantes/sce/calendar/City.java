@@ -6,10 +6,13 @@ import java.util.Objects;
  * A city
  */
 public class City {
-    public String country;
-    public String name;
+    private final String country;
+    private String name;
 
     public City(String country, String name) {
+        if (country==null || name==null){
+            throw new IllegalArgumentException("arguments must not be null");
+        }
         this.country = country;
         this.name = name;
     }
@@ -18,16 +21,17 @@ public class City {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name!=null) {
+            this.name = name;
+        }
+        else {
+            throw new IllegalArgumentException("arguments must not be null");
+        }
     }
 
     @Override

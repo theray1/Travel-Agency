@@ -46,24 +46,9 @@ class PersonTest {
     }
 
     @Test
-    void get_and_setRole_test(){
+    void getRole_test(){
         assertEquals("agent",agent.getRole());
         assertEquals("admin",admin.getRole());
-        try {
-            admin.setRole("agent");
-            agent.setRole("admin");
-            assertEquals("agent",admin.getRole());
-            assertEquals("admin",agent.getRole());
-        }
-        catch(InvalidClassException e){
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void setRole_test_with_wrong_role_must_throw_exception(){
-        assertThrows(InvalidClassException.class, () -> admin.setRole("test"));
-        assertThrows(InvalidClassException.class, () -> agent.setRole("test"));
     }
 
     @Test
