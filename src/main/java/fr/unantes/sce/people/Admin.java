@@ -5,6 +5,9 @@ import fr.unantes.sce.calendar.Travel;
 
 import java.io.InvalidClassException;
 
+/**
+ * Admin represents one of the roles available. An admin doesn't have a calendar but can manage an agent's calendar.
+ */
 public class Admin extends Role{
 
    @Override

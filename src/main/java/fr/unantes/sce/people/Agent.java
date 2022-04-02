@@ -5,6 +5,9 @@ import fr.unantes.sce.calendar.Travel;
 
 import java.io.InvalidClassException;
 
+/**
+ * Agent represents one of the roles available. An agent has a calendar but cannot manage any calendar.
+ */
 public class Agent extends Role{
    protected Calendar calendar;
 

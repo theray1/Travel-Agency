@@ -5,17 +5,23 @@ import fr.unantes.sce.people.Person;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * UserManager is used to add a new user, remove an already existing user, or check for a user in the user database.
+ */
 public class UserManager {
     private PasswordManager passwordManager;
     private Map<String, Person> namesToUsers;
 
+    /**
+     * Class constructor
+     */
     public UserManager() {
         namesToUsers = new HashMap<>();
         passwordManager = new PasswordManager();
     }
 
     /**
-     * Test if an user is registered in the manager
+     * Test if a user is registered in the manager
      * @param person - User to search for
      * @return True if the user is registered, False otherwise
      */

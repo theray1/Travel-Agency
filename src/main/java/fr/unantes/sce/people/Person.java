@@ -13,6 +13,12 @@ public class Person {
     private String name;
     private final Role role;
 
+    /**
+     * Class constructor
+     * @param name the name of the person
+     * @param role the role of the person
+     * @throws InvalidClassException
+     */
     public Person(String name, String role) throws InvalidClassException {
         if (!role.equals("agent") && !role.equals("admin")) {
             throw new InvalidClassException("Invalid role supplied. A person can only be an agent or an admin");

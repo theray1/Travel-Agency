@@ -3,6 +3,9 @@ package fr.unantes.sce.security;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * PasswordManager provides method used by UserManager to identify user through a password system.
+ */
 public class PasswordManager {
     private Map<String, String> usersToPasswords;
 
